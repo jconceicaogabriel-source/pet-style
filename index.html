@@ -1,0 +1,355 @@
+<!-- Diz ao navegador: "este arquivo é uma página HTML moderna (HTML5)" -->
+<!DOCTYPE html>
+<!-- Abre a página inteira. lang="pt-BR" avisa que o texto está em português do Brasil -->
+<html lang="pt-BR">
+<!-- HEAD = parte "invisível" da página, com configurações. Nada aqui aparece na tela -->
+<head>
+  <!-- Faz acentos (ç, ã, é) aparecerem certinhos em vez de símbolos estranhos -->
+  <meta charset="UTF-8">
+  <!-- Faz o site se ajustar à largura do celular. Sem isso, o responsivo não funciona -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Texto que aparece na abinha do navegador -->
+  <title>Pet&Style | Produtos para pets</title>
+
+  <!-- Baixa o Tailwind CSS da internet (CDN). É ele que faz as classes como "bg-sky" funcionarem -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- As duas linhas abaixo "aquecem" a conexão com o Google Fonts para as fontes carregarem mais rápido -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Baixa duas fontes: Fredoka (redondinha, para títulos) e Nunito (leitura, para textos) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Abre um bloco de JavaScript para personalizar o Tailwind com as cores e fontes da nossa loja -->
+  <script>
+    // Configuração do Tailwind: "theme" = tema, "extend" = adicionar coisas sem apagar as que já existem
+    tailwind.config = {
+      theme: {
+        extend: {
+          // Cria nomes de fonte: font-display (Fredoka) e font-sans (Nunito)
+          fontFamily: {
+            display: ['Fredoka', 'sans-serif'],
+            sans: ['Nunito', 'system-ui', 'sans-serif'],
+          },
+          // Cria nossas cores: usamos como bg-ink, text-berry, bg-sun, bg-sky...
+          colors: {
+            ink: '#1f2a44',   // azul bem escuro (textos e fundos escuros)
+            sky: '#e6f0ff',   // azul clarinho (fundos suaves)
+            sun: '#ffc93c',   // amarelo (destaques)
+            berry: '#e8476b', // rosa avermelhado (botões)
+          },
+        },
+      },
+    }
+  </script>
+  <link href="./src/output.css" rel="stylesheet">
+<!-- Fecha o HEAD -->
+</head>
+
+<!-- BODY = tudo que aparece na tela. Classes: bg-white = fundo branco | text-ink = letra azul escura | font-sans = fonte Nunito | antialiased = letras mais suaves -->
+<body class="bg-white text-ink font-sans antialiased">
+
+  <!-- ===================== HEADER (cabeçalho com logo e menu) ===================== -->
+  <!-- header: bg-white = fundo branco | border-b = linha embaixo | border-sky = linha azul clara | sticky top-0 = gruda no topo ao rolar | z-10 = fica por cima do resto -->
+  <header class="bg-white border-b border-sky sticky top-0 z-10">
+    <!-- Caixa que centraliza o conteúdo. max-w-6xl = largura máxima | mx-auto = centraliza | px-4 = espaço nas laterais | py-3 = espaço em cima e embaixo -->
+    <!-- flex = itens lado a lado | flex-col = no celular ficam um embaixo do outro | gap-2 = espacinho entre eles -->
+    <!-- sm:flex-row = a partir de telas pequenas-médias ficam na mesma linha | sm:items-center = alinha no meio | sm:justify-between = logo na esquerda e menu na direita -->
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <!-- Link do logo que leva ao topo (#inicio). font-display = Fredoka | text-2xl = letra grande | font-bold = negrito | flex items-center gap-2 = ícone e texto alinhados com espaço -->
+      <a href="#inicio" class="font-display text-2xl font-bold flex items-center gap-2">
+        <!-- Bolinha amarela com patinha. bg-sun = amarelo | rounded-full = redondo | w-9 h-9 = largura e altura 36px | flex items-center justify-center = patinha no meio | text-lg = tamanho do emoji -->
+        <span class="bg-sun rounded-full w-9 h-9 flex items-center justify-center text-lg">🐾</span>
+        <!-- Nome da loja. O "&amp;" é como se escreve o símbolo & em HTML. O span deixa só o "&" rosa (text-berry) -->
+        Pet<span class="text-berry">&amp;</span>Style
+      <!-- Fecha o link do logo -->
+      </a>
+      <!-- nav = área de navegação. aria-label ajuda leitores de tela (para cegos) a entenderem o que é -->
+      <nav aria-label="Menu principal">
+        <!-- ul = lista. flex = itens lado a lado | gap-4 = espaço entre eles | text-sm = letra pequena | font-semibold = meio negrito -->
+        <!-- sm:gap-6 = espaço maior em telas maiores | md:text-base = letra normal em telas médias -->
+        <ul class="flex gap-4 text-sm font-semibold sm:gap-6 md:text-base">
+          <!-- Cada li é um item da lista. hover:text-berry = o link fica rosa quando o mouse passa por cima. href="#produtos" pula para a seção com id="produtos" -->
+          <li><a class="hover:text-berry" href="#inicio">Início</a></li>
+          <li><a class="hover:text-berry" href="#produtos">Produtos</a></li>
+          <li><a class="hover:text-berry" href="#depoimentos">Depoimentos</a></li>
+          <li><a class="hover:text-berry" href="#contato">Contato</a></li>
+        <!-- Fecha a lista -->
+        </ul>
+      <!-- Fecha o menu -->
+      </nav>
+    <!-- Fecha a caixa centralizada -->
+    </div>
+
+  <!-- Fecha o cabeçalho -->
+  </header>
+
+  <!-- main = conteúdo principal da página (tudo entre o header e o footer) -->
+  <main>
+
+    <!-- ===================== HERO (primeira coisa que a pessoa vê) ===================== -->
+    <!-- section com id="inicio" (o menu aponta pra cá). bg-sky = fundo azul clarinho -->
+    <section id="inicio" class="bg-sky">
+      <!-- Caixa centralizada com espaço em volta. py-12 = bastante espaço em cima/embaixo (md:py-20 = mais ainda em telas médias) -->
+      <!-- grid = organiza em colunas | gap-8 = espaço entre colunas | items-center = alinha no meio na vertical -->
+      <!-- SEM prefixo (celular): 1 coluna. md:grid-cols-2 = a partir de tela média: 2 colunas (texto | imagem) -->
+      <div class="max-w-6xl mx-auto px-4 py-12 grid gap-8 items-center md:grid-cols-2 md:py-20">
+        <!-- Coluna do texto. text-center = centralizado no celular | md:text-left = alinhado à esquerda em telas médias -->
+        <div class="text-center md:text-left">
+          <!-- h1 = título principal (só pode ter UM por página). O tamanho da letra cresce conforme a tela: 4xl no celular, 5xl em sm, 6xl em lg -->
+          <!-- font-display = Fredoka | font-bold = negrito | leading-tight = linhas do texto mais juntinhas -->
+          <h1 class="font-display text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            Tudo o que seu pet precisa para viver bem e com estilo
+          <!-- Fecha o título -->
+          </h1>
+          <!-- Parágrafo de apoio. mt-4 = espaço acima | text-lg = letra um pouco maior | text-ink/80 = cor do texto com 80% de força (fica mais suave) -->
+          <!-- max-w-md = não deixa a linha ficar comprida demais | mx-auto = centraliza no celular | md:mx-0 = tira a centralização em telas médias -->
+          <p class="mt-4 text-lg text-ink/80 max-w-md mx-auto md:mx-0">
+            Roupinhas, brinquedos, camas e acessórios escolhidos com carinho para cães e gatos.
+          <!-- Fecha o parágrafo -->
+          </p>
+          <!-- Botão (na verdade um link) que desce até os produtos. inline-block = aceita margem e tamanho | mt-6 = espaço acima -->
+          <!-- bg-berry = fundo rosa | text-white = letra branca | font-bold = negrito | px-6 py-3 = espaço interno | rounded-full = pontas bem redondas -->
+          <!-- hover:bg-ink = escurece ao passar o mouse | transition = muda suavemente | focus:ring-4 = borda de destaque quando navega pelo teclado (Tab) -->
+          <a href="#produtos"
+             class="inline-block mt-6 bg-berry text-white font-bold px-6 py-3 rounded-full hover:bg-ink transition focus:outline-none focus:ring-4 focus:ring-berry/40">
+            Ver produtos
+          <!-- Fecha o botão -->
+          </a>
+        <!-- Fecha a coluna do texto -->
+        </div>
+        <!-- Coluna da imagem. flex justify-center = coloca a imagem no meio -->
+        <div class="flex justify-center">
+          <!-- "Imagem" de destaque feita com emojis. bg-sun = fundo amarelo | rounded-full = círculo | shadow-lg = sombra -->
+          <!-- Tamanho do círculo: w-56 h-56 no celular, sm:w-72 sm:h-72 depois, lg:w-96 lg:h-96 em telas grandes -->
+          <!-- flex items-center justify-center = emojis no meio do círculo | text-8xl... = tamanho do emoji, que também cresce com a tela -->
+          <!-- role="img" e aria-label = dizem a leitores de tela "isto é uma imagem de cachorro e gato" -->
+          <div class="bg-sun rounded-full w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 flex items-center justify-center text-8xl sm:text-9xl lg:text-[10rem] shadow-lg"
+               role="img" aria-label="Cachorro e gato">
+            🐶🐱
+          <!-- Fecha o círculo -->
+          </div>
+        <!-- Fecha a coluna da imagem -->
+        </div>
+      <!-- Fecha a caixa centralizada -->
+      </div>
+    <!-- Fecha o hero -->
+    </section>
+
+    <!-- ===================== PRODUTOS ===================== -->
+    <!-- section id="produtos" (o menu aponta pra cá). max-w-6xl mx-auto = centralizada | px-4 = laterais | py-14 = espaço em cima e embaixo -->
+    <section id="produtos" class="max-w-6xl mx-auto px-4 py-14">
+      <!-- Título da seção. text-center = centralizado | text-3xl (sm:text-4xl = maior em telas maiores) -->
+      <h2 class="font-display text-3xl font-bold text-center sm:text-4xl">Nossos produtos</h2>
+      <!-- Subtítulo. mt-2 = espacinho acima | text-ink/70 = cor mais clarinha -->
+      <p class="text-center mt-2 text-ink/70">Os favoritos da semana</p>
+
+      <!-- GRID DOS CARDS. grid = ativa colunas | mt-10 = espaço acima | gap-6 = espaço entre cards -->
+      <!-- grid-cols-1 = 1 card por linha no celular | sm:grid-cols-2 = 2 por linha | lg:grid-cols-4 = 4 por linha em telas grandes -->
+      <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- CARD 1. article = bloco independente. border border-sky = borda azul clara | rounded-2xl = cantos redondos | overflow-hidden = nada vaza pra fora dos cantos -->
+        <!-- flex flex-col = conteúdo empilhado de cima pra baixo (deixa os botões alinhados na base) -->
+        <article class="border border-sky rounded-2xl overflow-hidden flex flex-col">
+          <!-- Área da "foto". bg-sky = fundo | h-40 = altura 160px | flex items-center justify-center = emoji no meio | text-6xl = emoji grande -->
+          <div class="bg-sky h-40 flex items-center justify-center text-6xl" role="img" aria-label="Cama">🛏️</div>
+          <!-- Área do texto. p-5 = espaço interno | flex flex-col flex-1 = ocupa o espaço que sobrar do card -->
+          <div class="p-5 flex flex-col flex-1">
+            <!-- Nome do produto. text-xl = letra média-grande | font-semibold = meio negrito -->
+            <h3 class="font-display text-xl font-semibold">Caminha Nuvem</h3>
+            <!-- Descrição. text-sm = pequena | mt-1 = espacinho | flex-1 = empurra preço e botão para baixo -->
+            <p class="text-sm text-ink/70 mt-1 flex-1">Macia, lavável e ideal para cães de pequeno e médio porte.</p>
+            <!-- Preço. mt-4 = espaço acima | font-bold = negrito | text-lg = letra um pouco maior -->
+            <p class="mt-4 font-bold text-lg">R$ 129,90</p>
+            <!-- Botão de comprar (só visual). bg-ink = escuro | text-white = letra branca | rounded-full = redondo | py-2 = altura | hover:bg-berry = fica rosa com o mouse -->
+            <button class="mt-3 bg-ink text-white rounded-full py-2 font-semibold hover:bg-berry transition">Comprar</button>
+          <!-- Fecha a área do texto -->
+          </div>
+        <!-- Fecha o card 1 -->
+        </article>
+
+        <!-- CARD 2: mesma estrutura do card 1, só muda o produto e a cor de fundo da foto (bg-sun/40 = amarelo com 40% de força) -->
+        <article class="border border-sky rounded-2xl overflow-hidden flex flex-col">
+          <!-- Área da "foto" do card 2 -->
+          <div class="bg-sun/40 h-40 flex items-center justify-center text-6xl" role="img" aria-label="Bolinha">🎾</div>
+          <!-- Área do texto do card 2 -->
+          <div class="p-5 flex flex-col flex-1">
+            <!-- Nome -->
+            <h3 class="font-display text-xl font-semibold">Kit 3 Bolinhas</h3>
+            <!-- Descrição -->
+            <p class="text-sm text-ink/70 mt-1 flex-1">Borracha resistente para brincadeiras sem fim no parque.</p>
+            <!-- Preço -->
+            <p class="mt-4 font-bold text-lg">R$ 34,90</p>
+            <!-- Botão -->
+            <button class="mt-3 bg-ink text-white rounded-full py-2 font-semibold hover:bg-berry transition">Comprar</button>
+          <!-- Fecha a área do texto -->
+          </div>
+        <!-- Fecha o card 2 -->
+        </article>
+
+        <!-- CARD 3: mesma estrutura, fundo da foto bg-berry/15 (rosa com 15% de força) -->
+        <article class="border border-sky rounded-2xl overflow-hidden flex flex-col">
+          <!-- Área da "foto" do card 3 -->
+          <div class="bg-berry/15 h-40 flex items-center justify-center text-6xl" role="img" aria-label="Coleira">🦴</div>
+          <!-- Área do texto do card 3 -->
+          <div class="p-5 flex flex-col flex-1">
+            <!-- Nome -->
+            <h3 class="font-display text-xl font-semibold">Coleira Confort</h3>
+            <!-- Descrição -->
+            <p class="text-sm text-ink/70 mt-1 flex-1">Ajustável, acolchoada e com fecho de segurança.</p>
+            <!-- Preço -->
+            <p class="mt-4 font-bold text-lg">R$ 49,90</p>
+            <!-- Botão -->
+            <button class="mt-3 bg-ink text-white rounded-full py-2 font-semibold hover:bg-berry transition">Comprar</button>
+          <!-- Fecha a área do texto -->
+          </div>
+        <!-- Fecha o card 3 -->
+        </article>
+
+        <!-- CARD 4: mesma estrutura, fundo da foto azul clarinho -->
+        <article class="border border-sky rounded-2xl overflow-hidden flex flex-col">
+          <!-- Área da "foto" do card 4 -->
+          <div class="bg-sky h-40 flex items-center justify-center text-6xl" role="img" aria-label="Casaco">🧥</div>
+          <!-- Área do texto do card 4 -->
+          <div class="p-5 flex flex-col flex-1">
+            <!-- Nome -->
+            <h3 class="font-display text-xl font-semibold">Capa de Chuva</h3>
+            <!-- Descrição -->
+            <p class="text-sm text-ink/70 mt-1 flex-1">Impermeável e leve, para passeios em dias molhados.</p>
+            <!-- Preço -->
+            <p class="mt-4 font-bold text-lg">R$ 69,90</p>
+            <!-- Botão -->
+            <button class="mt-3 bg-ink text-white rounded-full py-2 font-semibold hover:bg-berry transition">Comprar</button>
+          <!-- Fecha a área do texto -->
+          </div>
+        <!-- Fecha o card 4 -->
+        </article>
+
+      <!-- Fecha o grid dos cards -->
+      </div>
+    <!-- Fecha a seção de produtos -->
+    </section>
+
+    <!-- ===================== DEPOIMENTOS ===================== -->
+    <!-- section id="depoimentos". bg-ink = fundo azul escuro | text-white = letras brancas -->
+    <section id="depoimentos" class="bg-ink text-white">
+      <!-- Caixa centralizada com espaço em volta -->
+      <div class="max-w-6xl mx-auto px-4 py-14">
+        <!-- Título da seção (centralizado) -->
+        <h2 class="font-display text-3xl font-bold text-center sm:text-4xl">Quem compra, recomenda</h2>
+
+        <!-- Grid dos depoimentos. gap-6 = espaço entre eles | 1 coluna no celular (padrão) | md:grid-cols-3 = 3 lado a lado em telas médias pra cima -->
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <!-- blockquote = citação. bg-white/10 = fundo branco quase transparente (10%) | rounded-2xl = cantos redondos | p-6 = espaço interno -->
+          <blockquote class="bg-white/10 rounded-2xl p-6">
+            <!-- A frase do cliente fictício -->
+            <p>“A caminha chegou rápido e a Luna não sai mais dela. Qualidade excelente!”</p>
+            <!-- Quem falou. mt-4 = espaço acima | font-semibold = meio negrito | text-sun = amarelo -->
+            <footer class="mt-4 font-semibold text-sun">Marina, tutora da Luna</footer>
+          <!-- Fecha depoimento 1 -->
+          </blockquote>
+          <!-- Depoimento 2 (mesma estrutura) -->
+          <blockquote class="bg-white/10 rounded-2xl p-6">
+            <!-- Frase -->
+            <p>“As bolinhas aguentaram todas as mordidas do Thor. Já comprei o segundo kit.”</p>
+            <!-- Autor -->
+            <footer class="mt-4 font-semibold text-sun">Rafael, tutor do Thor</footer>
+          <!-- Fecha depoimento 2 -->
+          </blockquote>
+          <!-- Depoimento 3 (mesma estrutura) -->
+          <blockquote class="bg-white/10 rounded-2xl p-6">
+            <!-- Frase -->
+            <p>“Atendimento atencioso e a capa de chuva ficou perfeita na Mel.”</p>
+            <!-- Autor -->
+            <footer class="mt-4 font-semibold text-sun">Camila, tutora da Mel</footer>
+          <!-- Fecha depoimento 3 -->
+          </blockquote>
+        <!-- Fecha o grid dos depoimentos -->
+        </div>
+      <!-- Fecha a caixa centralizada -->
+      </div>
+    <!-- Fecha a seção de depoimentos -->
+    </section>
+
+    <!-- ===================== CONTATO ===================== -->
+    <!-- section id="contato" centralizada, com espaço em volta -->
+    <section id="contato" class="max-w-6xl mx-auto px-4 py-14">
+      <!-- Título da seção -->
+      <h2 class="font-display text-3xl font-bold text-center sm:text-4xl">Fale com a gente</h2>
+
+      <!-- Grid de 2 áreas: gap-10 = espaço grande entre elas | 1 coluna no celular | lg:grid-cols-2 = informações à esquerda e formulário à direita em telas grandes -->
+      <div class="mt-10 grid gap-10 lg:grid-cols-2">
+        <!-- Área das informações. space-y-4 = espaço vertical entre os filhos -->
+        <div class="space-y-4">
+          <!-- Texto de convite -->
+          <p class="text-lg">Tem dúvida sobre tamanho, prazo ou pedido? Escreva ou ligue.</p>
+          <!-- E-mail. O span deixa a palavra "E-mail:" em negrito -->
+          <p><span class="font-bold">E-mail:</span> contato@petstyle.com.br</p>
+          <!-- Telefone -->
+          <p><span class="font-bold">Telefone:</span> (11) 4002-8922</p>
+          <!-- Horário de atendimento -->
+          <p><span class="font-bold">Horário:</span> segunda a sábado, das 9h às 18h</p>
+        <!-- Fecha a área das informações -->
+        </div>
+
+        <!-- FORMULÁRIO. id="form-contato" é o "nome" que o JavaScript usa para achá-lo -->
+        <!-- bg-sky = fundo azul claro | rounded-2xl = cantos redondos | p-6 = espaço interno | flex flex-col gap-4 = campos empilhados com espaço -->
+        <form id="form-contato" class="bg-sky rounded-2xl p-6 flex flex-col gap-4">
+          <!-- Campo NOME (uma div agrupa o rótulo e a caixinha) -->
+          <div>
+            <!-- label = rótulo. for="nome" liga ao input com id="nome" (clicar no rótulo seleciona a caixinha) | block = ocupa a linha toda | mb-1 = espacinho abaixo -->
+            <label for="nome" class="block font-semibold mb-1">Nome</label>
+            <!-- Caixinha de texto. required = obrigatório | w-full = largura total | rounded-lg = cantos redondos | border = borda | px-3 py-2 = espaço interno -->
+            <!-- focus:ring-4 = brilho rosa quando você clica na caixinha (ajuda a saber onde está) -->
+            <input id="nome" type="text" required
+                   class="w-full rounded-lg border border-ink/20 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-berry/30">
+          <!-- Fecha o campo nome -->
+          </div>
+          <!-- Campo E-MAIL -->
+          <div>
+            <!-- Rótulo do e-mail -->
+            <label for="email" class="block font-semibold mb-1">E-mail</label>
+            <!-- type="email" faz o navegador checar se tem @ e formato de e-mail válido -->
+            <input id="email" type="email" required
+                   class="w-full rounded-lg border border-ink/20 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-berry/30">
+          <!-- Fecha o campo e-mail -->
+          </div>
+          <!-- Campo MENSAGEM -->
+          <div>
+            <!-- Rótulo da mensagem -->
+            <label for="mensagem" class="block font-semibold mb-1">Mensagem</label>
+            <!-- textarea = caixa de texto grande. rows="4" = altura de 4 linhas -->
+            <textarea id="mensagem" rows="4" required
+                      class="w-full rounded-lg border border-ink/20 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-berry/30"></textarea>
+          <!-- Fecha o campo mensagem -->
+          </div>
+          <!-- Botão de enviar. type="submit" = dispara o envio do formulário | bg-berry = rosa | py-3 = altura | hover:bg-ink = escurece com o mouse -->
+          <button type="submit"
+                  class="bg-berry text-white font-bold rounded-full py-3 hover:bg-ink transition">
+            Enviar mensagem
+          <!-- Fecha o botão -->
+          </button>
+          <!-- Aviso de sucesso. "hidden" = começa escondido; o JavaScript remove essa classe quando o formulário é enviado -->
+          <p id="retorno" class="hidden font-semibold text-center">Mensagem enviada! Responderemos em breve.</p>
+        <!-- Fecha o formulário -->
+        </form>
+      <!-- Fecha o grid do contato -->
+      </div>
+    <!-- Fecha a seção de contato -->
+    </section>
+  <!-- Fecha o conteúdo principal -->
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <!-- footer = rodapé. bg-sky = fundo azul claro | text-center = centralizado | text-sm = letra pequena | py-6 = espaço em cima e embaixo -->
+  <footer class="bg-sky text-center text-sm py-6">
+    <!-- Texto de direitos. "&amp;" = símbolo & -->
+    © 2026 Pet&amp;Style. Loja fictícia criada para fins de estudo.
+  <!-- Fecha o rodapé -->
+  </footer>
+
+  <!-- Carrega o arquivo JavaScript que está na pasta js/. Fica no FINAL do body para o HTML carregar primeiro -->
+  <script src="js/script.js"></script>
+<!-- Fecha o body -->
+</body>
+<!-- Fecha a página inteira -->
+</html>
